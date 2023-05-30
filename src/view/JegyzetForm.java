@@ -49,8 +49,20 @@ public class JegyzetForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        hashMapCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hashMapCBActionPerformed(evt);
+            }
+        });
+
+        jegyzetJList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jegyzetJListMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jegyzetJList);
 
+        jegyzetContent.setEditable(false);
         jegyzetContent.setToolTipText("");
         jScrollPane2.setViewportView(jegyzetContent);
 
@@ -110,6 +122,14 @@ public class JegyzetForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void hashMapCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hashMapCBActionPerformed
+        jLfeltolt(hashMapCB.getSelectedItem().toString());
+    }//GEN-LAST:event_hashMapCBActionPerformed
+
+    private void jegyzetJListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jegyzetJListMouseClicked
+        jegyzetContent.setText(keresJegyzet(jegyzetJList.getSelectedValue().toString()));
+    }//GEN-LAST:event_jegyzetJListMouseClicked
 
     /**
      * @param args the command line arguments
@@ -173,5 +193,20 @@ public class JegyzetForm extends javax.swing.JFrame {
             dlm.addElement(jegyzet.getNev());
         }
         jegyzetJList.setModel(dlm);
+    }
+
+    private String keresJegyzet(String string) {
+        int i = 0;
+        boolean nincsMeg = true;
+        String valasz= "NincsMeg";
+        ArrayList<Jegyzet> aktiv = betoltottJegyzetek.get(hashMapCB.getSelectedItem().toString());
+        while (nincsMeg && i < aktiv.size()) {            
+            if (aktiv.get(i).getNev() == string) {
+                valasz = aktiv.get(i).getLeiras();
+                nincsMeg = false;
+            }
+            i++;
+        }
+        return valasz;
     }
 }

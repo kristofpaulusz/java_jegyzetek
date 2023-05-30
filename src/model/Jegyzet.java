@@ -23,4 +23,8 @@ public class Jegyzet {
     public String getNev() {
         return nev;
     }
+
+    public String getLeiras() {
+        return leiras;
+    }
 }
