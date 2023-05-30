@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -42,6 +46,9 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="jegyzetPanel">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jegyzetPanelMouseClicked"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Jegyzetek">
@@ -60,7 +67,7 @@
                           <Component id="hashMapCB" pref="95" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="311" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" pref="410" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -142,18 +149,37 @@
             </Constraint>
           </Constraints>
 
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="436" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="391" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+            <Property name="columns" type="int" value="0"/>
+            <Property name="rows" type="int" value="1"/>
           </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JToggleButton" name="serialBt">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Serializalas"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="deserialBt">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Deserializalas"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="saveToFile">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ment&#xe9;s F&#xe1;jlba"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="showImgBt">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Show K&#xe9;p"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JToggleButton" name="readFile">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Txt Beolvas&#xe1;s"/>
+              </Properties>
+            </Component>
+          </SubComponents>
         </Container>
       </SubComponents>
     </Container>

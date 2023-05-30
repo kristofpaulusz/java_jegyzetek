@@ -4,11 +4,13 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author g
  */
-public class Jegyzet {
+public class Jegyzet implements Serializable {
     /*
     
     */

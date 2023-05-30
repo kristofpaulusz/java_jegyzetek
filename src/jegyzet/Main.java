@@ -4,6 +4,8 @@
  */
 package jegyzet;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import model.JegyzetModel;
 import view.JegyzetForm;
 
@@ -12,10 +14,22 @@ import view.JegyzetForm;
  * @author g
  */
 public class Main {
+    private static JegyzetForm view;
     public static void main(String[] args) {
        JegyzetModel model = new JegyzetModel();
-        JegyzetForm view = new JegyzetForm(model.getJegyzeteim());
+        view = new JegyzetForm(model.getJegyzeteim());
         view.setVisible(true);
         
+        
+        
+        view.addKepListener(new KepListener());
+    
+    }
+    public static class KepListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.showImg();
+        }
     }
 }

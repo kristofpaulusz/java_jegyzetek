@@ -4,11 +4,21 @@
  */
 package view;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import jegyzet.Main;
+import jegyzet.Main.KepListener;
 import model.Jegyzet;
 
 /**
@@ -38,6 +48,7 @@ public class JegyzetForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jegyzetPanel = new javax.swing.JPanel();
         hashMapCB = new javax.swing.JComboBox<>();
@@ -46,8 +57,19 @@ public class JegyzetForm extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jegyzetContent = new javax.swing.JTextPane();
         ujJegyzetPanel = new javax.swing.JPanel();
+        serialBt = new javax.swing.JToggleButton();
+        deserialBt = new javax.swing.JButton();
+        saveToFile = new javax.swing.JButton();
+        showImgBt = new javax.swing.JButton();
+        readFile = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jegyzetPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jegyzetPanelMouseClicked(evt);
+            }
+        });
 
         hashMapCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +98,7 @@ public class JegyzetForm extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(hashMapCB, 0, 95, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
         jegyzetPanelLayout.setVerticalGroup(
@@ -93,16 +115,22 @@ public class JegyzetForm extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Jegyzetek", jegyzetPanel);
 
-        javax.swing.GroupLayout ujJegyzetPanelLayout = new javax.swing.GroupLayout(ujJegyzetPanel);
-        ujJegyzetPanel.setLayout(ujJegyzetPanelLayout);
-        ujJegyzetPanelLayout.setHorizontalGroup(
-            ujJegyzetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 436, Short.MAX_VALUE)
-        );
-        ujJegyzetPanelLayout.setVerticalGroup(
-            ujJegyzetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 391, Short.MAX_VALUE)
-        );
+        ujJegyzetPanel.setLayout(new java.awt.GridLayout());
+
+        serialBt.setText("Serializalas");
+        ujJegyzetPanel.add(serialBt);
+
+        deserialBt.setText("Deserializalas");
+        ujJegyzetPanel.add(deserialBt);
+
+        saveToFile.setText("Mentés Fájlba");
+        ujJegyzetPanel.add(saveToFile);
+
+        showImgBt.setText("Show Kép");
+        ujJegyzetPanel.add(showImgBt);
+
+        readFile.setText("Txt Beolvasás");
+        ujJegyzetPanel.add(readFile);
 
         jTabbedPane1.addTab("Új", ujJegyzetPanel);
 
@@ -130,6 +158,10 @@ public class JegyzetForm extends javax.swing.JFrame {
     private void jegyzetJListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jegyzetJListMouseClicked
         jegyzetContent.setText(keresJegyzet(jegyzetJList.getSelectedValue().toString()));
     }//GEN-LAST:event_jegyzetJListMouseClicked
+
+    private void jegyzetPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jegyzetPanelMouseClicked
+        
+    }//GEN-LAST:event_jegyzetPanelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -167,6 +199,8 @@ public class JegyzetForm extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton deserialBt;
     private javax.swing.JComboBox<String> hashMapCB;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -174,6 +208,10 @@ public class JegyzetForm extends javax.swing.JFrame {
     private javax.swing.JTextPane jegyzetContent;
     private javax.swing.JList<String> jegyzetJList;
     private javax.swing.JPanel jegyzetPanel;
+    private javax.swing.JToggleButton readFile;
+    private javax.swing.JButton saveToFile;
+    private javax.swing.JToggleButton serialBt;
+    private javax.swing.JButton showImgBt;
     private javax.swing.JPanel ujJegyzetPanel;
     // End of variables declaration//GEN-END:variables
 
@@ -208,5 +246,18 @@ public class JegyzetForm extends javax.swing.JFrame {
             i++;
         }
         return valasz;
+    }
+
+    public void addKepListener(KepListener kepListener) {
+        showImgBt.addActionListener(kepListener);
+    }
+
+    public void showImg() {
+        try {
+            BufferedImage bi = ImageIO.read(new File("csiga.png"));
+            JOptionPane.showMessageDialog(this, "Kép Betöltve", "KépBetöltés", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(bi));
+        } catch (IOException ex) {
+            Logger.getLogger(JegyzetForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
